@@ -54,7 +54,7 @@
 
 <section id="sobre-mim">
     <h2>Sobre Mim</h2>
-    <p>Olá! Sou Robson Junior, um profissional dedicado e apaixonado pelo que faço. Ter a oportunidade de desenvolver-me profissionalmente, colocando em prática aspectos estudados anteriormente. Fazer um bom trabalho em equipe. Aqui você encontrará meus projetos e informações de contato.</p>
+    <p>Olá! Sou Robson Junior, um profissional dedicado e apaixonado pelo que faço.</p>
 </section>
 
 <section id="projetos">
