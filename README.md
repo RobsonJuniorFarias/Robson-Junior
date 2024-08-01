@@ -76,5 +76,18 @@
     <p>&copy; 2024 Robson Junior</p>
 </footer>
 
+<!-- Begin Chat HTML Code -->
+<span id="wchat_btn_1722535610" onclick="wchat_launch_chat_0(0)" style="color: #0000FF; text-decoration: underline; cursor: pointer;"></span>
+<script type="text/JavaScript">
+(function() {
+    var wchat_e_1722535610 = document.createElement("script") ;
+    wchat_e_1722535610.type = "text/javascript" ;
+    wchat_e_1722535610.async = true ;
+    wchat_e_1722535610.src = "https://diallinklg.multidadosti.com.br/wchat/js/wchat_v2.js.php?codigo_db=dial_link_lg&v=0|1722535610|2|" ;
+    document.getElementById("wchat_btn_1722535610").appendChild( wchat_e_1722535610 ) ;
+})();
+</script>
+<!-- End Chat HTML Code -->
+
 </body>
 </html>
