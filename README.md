@@ -69,7 +69,7 @@
         <li><a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a></li>
         <li><a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a></li>
     </ul>
-    <p>Você pode baixar meu currículo <a href="https://www.canva.com/design/DAFhBeKrj-A/sZSwqw4ggGVMS_dqlxHuuw/edit" target="_blank">aqui</a>.</p>
+    <p>Você pode baixar meu currículo <a href="Robson Junior (1).pdf" target="_blank">aqui</a>.</p>
 </section>
 
 <footer>
