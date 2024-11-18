@@ -37,9 +37,25 @@
             font-size: 1.2em;
         }
 
+        .theme-selector {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .theme-selector label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .theme-selector input[type="color"] {
+            cursor: pointer;
+        }
+
         .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 20px;
             padding: 20px;
             max-width: 1200px;
@@ -52,6 +68,9 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             text-align: center;
+            flex: 1 1 calc(33.333% - 40px);
+            max-width: calc(33.333% - 40px);
+            min-width: 300px;
         }
 
         .card h2 {
@@ -84,18 +103,11 @@
             margin-top: 20px;
         }
 
-        .theme-selector {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .theme-selector label {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .theme-selector input[type="color"] {
-            cursor: pointer;
+        @media (max-width: 768px) {
+            .card {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
