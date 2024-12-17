@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="RJ" sizes="180x180" href="favicon.ico">
     <title>Portfólio - Robson Junior</title>
     <link rel="icon" href="https://img.icons8.com/ios-filled/50/000000/code.png" type="image/png">
     <style>
@@ -126,7 +127,7 @@
 <main class="container">
     <section class="card">
         <h2>Sobre Mim</h2>
-        <p>Olá! Sou Robson Junior, um profissional dedicado e apaixonado pelo que faço. Ter a oportunidade de desenvolver-me profissionalmente, colocando em prática aspectos estudados anteriormente. Fazer um bom trabalho em equipe.</p>
+        <p>Olá! Sou Robson Junior, um profissional dedicado e apaixonado pelo que faço. Busco ter a oportunidade de desenvolver-me profissionalmente, colocando em prática aspectos estudados anteriormente, contribuindo para o sucesso de projetos por meio do trabalho em equipe.</p>
     </section>
 
     <section class="card">
@@ -140,7 +141,7 @@
         <p>Vamos nos conectar! Siga-me nas redes sociais:</p>
         <a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a><br><br>
         <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a><br><br>
-        <a href="" target="_blank">Baixar Currículo</a>
+        <a href="Robson Junior.pdf" target="_blank">Baixar Currículo</a>
     </section>
 </main>
 
