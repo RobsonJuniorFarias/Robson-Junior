@@ -140,7 +140,7 @@
         <p>Vamos nos conectar! Siga-me nas redes sociais:</p>
         <a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a><br><br>
         <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a><br><br>
-        <a href="https://www.canva.com/design/DAFhBeKrj-A/sZSwqw4ggGVMS_dqlxHuuw/edit" target="_blank">Baixar Currículo</a>
+        <a href="" target="_blank">Baixar Currículo</a>
     </section>
 </main>
 
