@@ -5,188 +5,251 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio - Robson Junior</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
-    <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-            --bg-color: #f7f7f7;
-            --text-color: #333;
-            --header-bg: linear-gradient(135deg, #007BFF, #4A90E2);
-            --header-text: #fff;
-            --card-bg: #fff;
-            --card-shadow: rgba(0, 0, 0, 0.1);
-            --button-bg: #007BFF;
-            --button-hover: #0056b3;
-        }
-
-        body.dark {
-            --bg-color: #121212;
-            --text-color: #f7f7f7;
-            --header-bg: linear-gradient(135deg, #1E1E1E, #333333);
-            --header-text: #f7f7f7;
-            --card-bg: #1E1E1E;
-            --card-shadow: rgba(255, 255, 255, 0.1);
-            --button-bg: #4A90E2;
-            --button-hover: #007BFF;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
-
-        header {
-            background: var(--header-bg);
-            color: var(--header-text);
-            text-align: center;
-            padding: 50px 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        header p {
-            font-size: 1.2em;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--button-bg);
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background: var(--button-hover);
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px var(--card-shadow);
-            padding: 20px;
-            text-align: center;
-            flex: 1 1 calc(33.333% - 40px);
-            max-width: calc(33.333% - 40px);
-            min-width: 300px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .card h2 {
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            margin-bottom: 20px;
-        }
-
-        .card a {
-            display: inline-block;
-            background: var(--button-bg);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: transform 0.2s, background 0.3s;
-        }
-
-        .card a:hover {
-            background: var(--button-hover);
-            transform: scale(1.05);
-        }
-
-        footer {
-            background: var(--header-bg);
-            color: var(--header-text);
-            text-align: center;
-            padding: 20px 10px;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .card {
-                flex: 1 1 100%;
-                max-width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <h1>Robson Junior</h1>
-        <p>Bem-vindo ao meu portfólio!</p>
+        <div class="logo">
+            <h1>Robson Junior</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()">🌙 / 🌞</button>
+        </div>
     </header>
 
-    <button class="theme-toggle">Alternar Tema</button>
+    <section id="home" class="home-section">
+        <div class="content">
+            <h2>Bem-vindo ao meu portfólio!</h2>
+            <p>Sou Robson Junior, apaixonado por tecnologia e inovação. Explore meu trabalho e entre em contato!</p>
+        </div>
+    </section>
 
-    <main class="container">
-        <section class="card">
-            <h2>Sobre Mim</h2>
-            <p>Olá! Sou Robson Junior, um profissional dedicado e apaixonado pelo que faço. Busco ter a oportunidade de desenvolver-me profissionalmente, colocando em prática aspectos estudados anteriormente, contribuindo para o sucesso de projetos por meio do trabalho em equipe.</p>
-        </section>
+    <section id="sobre" class="info-section">
+        <h2>Sobre Mim</h2>
+        <p>Sou desenvolvedor full-stack com foco em criar soluções eficazes e inovadoras. Tenho experiência em tecnologias como HTML, CSS, JavaScript, React, Node.js e muito mais. Meu objetivo é continuar aprendendo e crescer profissionalmente em um ambiente colaborativo.</p>
+    </section>
 
-        <section class="card">
-            <h2>Projetos</h2>
-            <p>Confira alguns dos meus projetos e veja mais detalhes sobre meu trabalho.</p>
-            <a href="https://github.com/RobsonJuniorFarias" target="_blank">Ver Projetos</a>
-        </section>
+    <section id="projetos" class="projects-section">
+        <h2>Meus Projetos</h2>
+        <div class="projects-container">
+            <div class="project-card">
+                <h3>Projeto 1</h3>
+                <p>Descrição do projeto, tecnologias usadas e link para visualizar.</p>
+                <a href="#">Ver Mais</a>
+            </div>
+            <div class="project-card">
+                <h3>Projeto 2</h3>
+                <p>Descrição do projeto, tecnologias usadas e link para visualizar.</p>
+                <a href="#">Ver Mais</a>
+            </div>
+            <div class="project-card">
+                <h3>Projeto 3</h3>
+                <p>Descrição do projeto, tecnologias usadas e link para visualizar.</p>
+                <a href="#">Ver Mais</a>
+            </div>
+        </div>
+    </section>
 
-        <section class="card">
-            <h2>Contato</h2>
-            <p>Vamos nos conectar! Siga-me nas redes sociais:</p>
-            <a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a><br><br>
-            <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a><br><br>
-            <a href="Robson Junior.pdf" target="_blank">Baixar Currículo</a>
-        </section>
-    </main>
+    <section id="contato" class="contact-section">
+        <h2>Entre em Contato</h2>
+        <p>Vamos conversar! Me envie uma mensagem ou me siga nas redes sociais.</p>
+        <a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a>
+        <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a>
+        <a href="Robson Junior.pdf" target="_blank">Baixar Currículo</a>
+    </section>
 
     <footer>
         <p>&copy; 2024 Robson Junior. Todos os direitos reservados.</p>
     </footer>
 
-    <script>
-        const themeToggle = document.querySelector('.theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-        });
-    </script>
+    <script src="script.js"></script>
+    /* Resetando estilos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Cores e fontes */
+:root {
+    --bg-color-light: #f4f4f9;
+    --bg-color-dark: #1f1f1f;
+    --text-color-light: #333;
+    --text-color-dark: #f4f4f9;
+    --accent-color: #007BFF;
+    --button-hover-color: #0056b3;
+}
+
+/* Corpo do site */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--accent-color);
+    color: white;
+}
+
+header .logo h1 {
+    font-size: 2.5rem;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+header .theme-toggle button {
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+header .theme-toggle button:hover {
+    background-color: white;
+    color: var(--accent-color);
+}
+
+/* Home Section */
+.home-section {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.home-section h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.home-section p {
+    font-size: 1.3rem;
+}
+
+/* Informações e Projetos */
+.info-section, .projects-section, .contact-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.info-section h2, .projects-section h2, .contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.projects-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.project-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 30%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-card a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.project-card a:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* Links de contato */
+.contact-section a {
+    display: inline-block;
+    margin: 10px 0;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-section a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Modo Dark */
+body.dark {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+body.dark header {
+    background-color: #333;
+}
+
+body.dark .theme-toggle button {
+    border: 1px solid #333;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .projects-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .project-card {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+// Função para alternar o tema claro/escuro
+function toggleTheme() {
+    document.body.classList.toggle('dark');
+}
+
 </body>
 
 </html>
