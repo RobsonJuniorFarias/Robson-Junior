@@ -77,7 +77,7 @@
         }
 
         .theme-toggle:hover {
-            background: var(--button-);
+            background: var(--button-hover);
         }
 
         .container {
