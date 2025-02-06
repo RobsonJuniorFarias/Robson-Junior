@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <style>
-        /* Reset */
+        /* Reset geral */
         * {
             margin: 0;
             padding: 0;
@@ -16,121 +16,155 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            font-family: 'Helvetica', sans-serif;
             line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: #fff;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
         }
 
+        /* Layout de navegação fixa */
         header {
-            background: linear-gradient(135deg, #3498db, #8e44ad);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #222;
             color: white;
-            padding: 60px 20px;
+            padding: 20px 0;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
         }
 
         header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: 1.5px;
         }
 
-        header p {
-            font-size: 1.3em;
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s;
         }
 
+        header nav a:hover {
+            color: #3498db;
+        }
+
+        /* Cards de conteúdo */
         .container {
-            width: 90%;
+            padding-top: 100px;
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
+            gap: 40px;
             flex-wrap: wrap;
-            gap: 30px;
         }
 
-        .section-card {
-            background: #fff;
+        .card {
+            background: #f4f4f4;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 30px;
-            flex-basis: 32%;
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            flex: 1 1 calc(33% - 40px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .section-card:hover {
-            transform: translateY(-5px);
+        .card:hover {
+            transform: translateY(-10px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .section-card h2 {
-            font-size: 2em;
-            color: #3498db;
-            margin-bottom: 20px;
+        .card h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 15px;
         }
 
-        .section-card p {
-            font-size: 1.1em;
+        .card p {
             color: #555;
             margin-bottom: 20px;
         }
 
-        .section-card a {
+        .card a {
             display: inline-block;
-            background: #3498db;
-            color: white;
-            text-decoration: none;
             padding: 12px 25px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            transition: background 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
-        .section-card a:hover {
-            background: #2980b9;
+        .card a:hover {
+            background-color: #2980b9;
             transform: scale(1.05);
         }
 
+        /* Rodapé */
         footer {
-            background: #3498db;
+            background: #222;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 20px 0;
             margin-top: 40px;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        footer p {
-            font-size: 1.2em;
-        }
-
+        /* Botão de alternar tema */
         .theme-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #8e44ad;
+            background-color: #3498db;
             color: white;
             padding: 15px;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            transition: background 0.3s ease;
+            font-size: 1.5rem;
+            z-index: 999;
+            transition: background-color 0.3s;
         }
 
         .theme-toggle:hover {
-            background: #9b59b6;
+            background-color: #2980b9;
         }
 
+        /* Tema escuro */
+        body.dark {
+            background-color: #121212;
+            color: #f0f0f0;
+        }
+
+        body.dark header {
+            background-color: #1e1e1e;
+        }
+
+        body.dark .card {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+        }
+
+        body.dark footer {
+            background-color: #1e1e1e;
+        }
+
+        /* Responsividade */
         @media (max-width: 768px) {
-            .section-card {
-                flex-basis: 100%;
+            .card {
+                flex: 1 1 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
             }
 
-            footer p {
-                font-size: 1em;
+            header h1 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -139,44 +173,55 @@
 <body>
     <header>
         <h1>Robson Junior</h1>
-        <p>Bem-vindo ao meu portfólio!</p>
+        <nav>
+            <a href="#sobre">Sobre Mim</a>
+            <a href="#projetos">Projetos</a>
+            <a href="#contato">Contato</a>
+        </nav>
     </header>
 
     <button class="theme-toggle">🌙</button>
 
-    <main class="container">
+    <div class="container">
         <!-- Sobre Mim -->
-        <section class="section-card" id="sobre">
+        <section id="sobre" class="card">
             <h2>Sobre Mim</h2>
-            <p>Olá! Sou Robson Junior, um profissional dedicado e apaixonado pelo que faço. Busco sempre me aprimorar, colocando em prática o conhecimento adquirido ao longo da minha trajetória profissional.</p>
+            <p>Sou Robson Junior, apaixonado por tecnologia e desenvolvimento. Minha jornada é movida pela vontade de aprender e aplicar novos conhecimentos, sempre com foco em melhorar minhas habilidades e contribuir para projetos incríveis.</p>
         </section>
 
         <!-- Projetos -->
-        <section class="section-card" id="projetos">
+        <section id="projetos" class="card">
             <h2>Projetos</h2>
-            <p>Aqui você encontra alguns dos meus projetos mais recentes, onde apliquei minhas habilidades em desenvolvimento web e tecnologia.</p>
+            <p>Confira alguns dos meus projetos mais recentes e veja como coloquei em prática minhas habilidades em programação e design.</p>
             <a href="https://github.com/RobsonJuniorFarias" target="_blank">Ver Projetos</a>
         </section>
 
         <!-- Contato -->
-        <section class="section-card" id="contato">
+        <section id="contato" class="card">
             <h2>Contato</h2>
-            <p>Vamos nos conectar! Siga-me nas redes sociais ou entre em contato diretamente por e-mail.</p>
+            <p>Vamos conversar! Siga-me nas redes sociais ou envie uma mensagem diretamente para o meu e-mail.</p>
             <a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a><br><br>
             <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a><br><br>
             <a href="Robson Junior.pdf" target="_blank">Baixar Currículo</a>
         </section>
-    </main>
+    </div>
 
     <footer>
         <p>&copy; 2024 Robson Junior. Todos os direitos reservados.</p>
     </footer>
 
     <script>
+        // Alternar tema
         const themeToggle = document.querySelector('.theme-toggle');
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark');
-            themeToggle.textContent = document.body.classList.contains('dark') ? '🌞' : '🌙';
+
+            // Mudar o ícone do botão de alternância
+            if (document.body.classList.contains('dark')) {
+                themeToggle.textContent = '🌞'; // Ícone do sol
+            } else {
+                themeToggle.textContent = '🌙'; // Ícone da lua
+            }
         });
     </script>
 </body>
