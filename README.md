@@ -176,7 +176,7 @@
 
         <section class="card">
             <h2>Contato</h2>
-            <p>Vamos nos conectar! Siga-me nas redes sociais:</p>
+            <p>Deixo aqui abaixo, minhas redes sociais e currículo, fique a vontade:</p>
             <a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a><br><br>
             <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a><br><br>
             <a href="curriculo_compressed.pdf" target="_blank">Baixar Currículo</a>
