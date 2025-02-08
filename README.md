@@ -167,12 +167,12 @@
     <main class="container">
         <section class="card">
             <h2>Sobre Mim</h2>
-            <p>Olá! Sou Robson Junior, um profissional dedicado e apaixonado pelo que faço. Busco ter a oportunidade de desenvolver-me profissionalmente, colocando em prática aspectos estudados anteriormente, contribuindo para o sucesso de projetos por meio do trabalho em equipe.</p>
+            <p>Olá, seja bem-vindo (a) ao meu portifólio. Sou o Robson Junior, atualmente tenho 17 anos. Sou apaixonado por tecnologia e atuo na área de TI há quase três anos. Deixo disponível nesse site, minhas redes sociais, alguns projetos feitos por mim e até meu currículo. Atualmente estou focado nos estudos relacionado em programação, tanto BackEnd quanto FrontEnd, como HTML, CSS e Node.js. Gosto bastante do trabalho em equipe, sou bastante comunicativo e consigo ter uma boa relação interpessoal, geralmente agregando nos desenvolvimentos da equipe.  Se eu puder ajudar em algo, não hesite em entrar em contato! Obrigado.</p>
         </section>
 
         <section class="card">
             <h2>Projetos</h2>
-            <p>Confira alguns dos meus projetos e veja mais detalhes sobre meu trabalho.</p>
+            <p>Confira alguns projetos em código aberto feito por mim disponibilizado no GitHub.</p>
             <a href="https://github.com/RobsonJuniorFarias" target="_blank">Ver Projetos</a>
         </section>
 
