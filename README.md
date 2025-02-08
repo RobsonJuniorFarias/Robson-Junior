@@ -101,6 +101,8 @@
             max-width: calc(33.333% - 40px);
             min-width: 300px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden; /* Esconde o excesso de texto */
+            height: 400px; /* Altura fixa */
         }
 
         .card:hover {
@@ -114,6 +116,9 @@
 
         .card p {
             margin-bottom: 20px;
+            overflow: hidden; /* Para limitar o texto */
+            text-overflow: ellipsis; /* Adiciona "..." caso o texto seja muito longo */
+            white-space: nowrap; /* Impede o texto de quebrar a linha */
         }
 
         .card a {
@@ -143,6 +148,7 @@
             .card {
                 flex: 1 1 100%;
                 max-width: 100%;
+                height: auto; /* Remove altura fixa em telas pequenas */
             }
         }
     </style>
