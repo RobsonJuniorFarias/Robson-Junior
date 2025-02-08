@@ -101,8 +101,7 @@
             max-width: calc(33.333% - 40px);
             min-width: 300px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden; /* Esconde o excesso de texto */
-            height: 400px; /* Altura fixa */
+            height: auto; /* Removido a altura fixa para que a card se ajuste ao conteúdo */
         }
 
         .card:hover {
@@ -116,9 +115,13 @@
 
         .card p {
             margin-bottom: 20px;
-            overflow: hidden; /* Para limitar o texto */
-            text-overflow: ellipsis; /* Adiciona "..." caso o texto seja muito longo */
-            white-space: nowrap; /* Impede o texto de quebrar a linha */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal; /* Permite o texto quebrar a linha */
+            max-height: 200px; /* Limita o máximo de altura para o texto, mas não corta */
+            display: -webkit-box;
+            -webkit-line-clamp: 5; /* Número máximo de linhas que o texto pode ocupar */
+            -webkit-box-orient: vertical;
         }
 
         .card a {
@@ -148,7 +151,6 @@
             .card {
                 flex: 1 1 100%;
                 max-width: 100%;
-                height: auto; /* Remove altura fixa em telas pequenas */
             }
         }
     </style>
@@ -176,7 +178,7 @@
 
         <section class="card">
             <h2>Contato</h2>
-            <p>Deixo aqui abaixo, minhas redes sociais e currículo, fique a vontade:</p>
+            <p>Deixo aqui abaixo, minhas redes sociais e meu currículo, fique a vontade:</p>
             <a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a><br><br>
             <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a><br><br>
             <a href="Robson Junior.pdf" target="_blank">Baixar Currículo</a>
