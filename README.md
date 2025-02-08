@@ -101,7 +101,6 @@
             max-width: calc(33.333% - 40px);
             min-width: 300px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            min-height: 200px; /* Altura mínima para o cartão */
         }
 
         .card:hover {
@@ -115,13 +114,6 @@
 
         .card p {
             margin-bottom: 20px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: normal;
-            max-height: 200px; /* Limita o máximo de altura para o texto, mas não corta */
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
         }
 
         .card a {
@@ -167,18 +159,18 @@
     <main class="container">
         <section class="card">
             <h2>Sobre Mim</h2>
-            <p>Olá, seja bem-vindo (a) ao meu portifólio. Sou o Robson Junior, atualmente tenho 17 anos. Sou apaixonado por tecnologia e atuo na área de TI há quase três anos. Deixo disponível nesse site, minhas redes sociais, alguns projetos feitos por mim e até meu currículo. Atualmente estou focado nos estudos relacionado em programação, tanto BackEnd quanto FrontEnd, como HTML, CSS e Node.js. Gosto bastante do trabalho em equipe, sou bastante comunicativo e consigo ter uma boa relação interpessoal, geralmente agregando nos desenvolvimentos da equipe. Se eu puder ajudar em algo, não hesite em entrar em contato! Obrigado.</p>
+            <p>Olá! Sou Robson Junior, um profissional dedicado e apaixonado pelo que faço. Busco ter a oportunidade de desenvolver-me profissionalmente, colocando em prática aspectos estudados anteriormente, contribuindo para o sucesso de projetos por meio do trabalho em equipe.</p>
         </section>
 
         <section class="card">
             <h2>Projetos</h2>
-            <p>Confira alguns projetos em código aberto feito por mim disponibilizado no GitHub.</p>
+            <p>Confira alguns dos meus projetos e veja mais detalhes sobre meu trabalho.</p>
             <a href="https://github.com/RobsonJuniorFarias" target="_blank">Ver Projetos</a>
         </section>
 
         <section class="card">
             <h2>Contato</h2>
-            <p>Deixo aqui abaixo, minhas redes sociais e meu currículo, fique a vontade:</p>
+            <p>Vamos nos conectar! Siga-me nas redes sociais:</p>
             <a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a><br><br>
             <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a><br><br>
             <a href="curriculo_compressed.pdf" target="_blank">Baixar Currículo</a>
