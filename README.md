@@ -105,7 +105,11 @@
     </section>
     <section class="card">
         <h2>Quem é o Robson?</h2>
-        <p>Olá, sou o Robson Junior! Tenho 17 anos e sou apaixonado por tecnologia. Com quase 3 anos de experiência na área de TI, hoje foco meus estudos em programação — especialmente em desenvolvimento Front-End (HTML, CSS, JavaScript) e Back-End (Node.js). Valorizo o trabalho em equipe, comunicação e sempre busco contribuir para o crescimento dos projetos em que participo. Seja bem-vindo ao meu portfólio!</p>
+        <p>Olá, sou o Robson Junior! Tenho 17 anos e sou apaixonado por tecnologia.</p>
+        <p>Atuo na área de Tecnologia da Informação há cerca de três anos, tendo passado pelas funções de Jovem Aprendiz e Estagiário. Nesse período, desenvolvi habilidades técnicas e comportamentais importantes para o ambiente profissional</p>
+        <p>No momento, estou me dedicando ao aprendizado de programação, tendo finalizado alguns módulos de HTML e CSS3, e iniciei o desenvolvimento de projetos utilizando JavaScript com Node.js.</p>
+        <p>Prezo muito a colaboração em grupo, a comunicação clara e procuro sempre agregar valor ao desenvolvimento dos projetos dos quais participo.</p>
+        <p>Seja bem-vindo ao meu portfólio!</p>
     </section>
 
     <section class="card">
