@@ -130,7 +130,7 @@
 
     <!-- HEADER -->
     <header>
-      <img src="perfil.jpg" alt="Robson Junior" class="profile">
+      <img src="perfil.png" alt="Robson Junior" class="profile">
       <div>
         <h1>Robson Junior</h1>
         <span>Suporte Técnico N1</span>
