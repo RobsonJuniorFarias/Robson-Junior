@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <title>Robson Junior - Desenvolvedor Junior</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robson Junior | Suporte Técnico</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -13,120 +15,208 @@
     }
 
     body {
-      font-family: Calibri, sans-serif;
-      background-color: #E4F2E7;
-      color: #2D3E40;
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      background: #0b0f19;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px 20px;
     }
 
     header {
-      background-color: #387373;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .profile {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #22c55e;
     }
 
     header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    header span {
+      font-size: 0.85rem;
+      color: #9ca3af;
     }
 
     section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
+      margin-bottom: 35px;
+    }
+
+    h2 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: #22c55e;
+    }
+
+    p {
+      font-size: 0.92rem;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
     }
 
     .card {
-      background-color: #93BFB7;
-      border-radius: 12px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+      background: #111827;
+      padding: 14px;
+      border-radius: 8px;
+      transition: 0.2s;
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      border: 1px solid #22c55e;
     }
 
-    .card h2 {
-      margin-bottom: 15px;
-      font-size: 1.5em;
+    .card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 5px;
     }
 
-    .button {
+    .links a {
       display: inline-block;
-      background-color: #387373;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      margin: 10px 5px 0 0;
-      transition: background 0.3s ease;
+      margin-right: 10px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      padding: 7px 12px;
+      border-radius: 6px;
+      border: 1px solid #22c55e;
+      color: #22c55e;
+      transition: 0.2s;
     }
 
-    .button:hover {
-      background-color: #2d5c5c;
+    .links a:hover {
+      background: #22c55e;
+      color: #000;
     }
 
     footer {
-      background-color: #387373;
-      color: white;
       text-align: center;
-      padding: 20px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      padding: 15px;
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.8em;
-      }
-
-      .card {
-        padding: 20px;
-      }
-    }
-        h1{
-        text-align: center;
-    }
-    .card1 {
-        background-color: #387373;
-        border-radius: 12px;
-        padding: 30px;
-        margin-bottom: 30px;
-        color: white;
-    }
   </style>
+</head>
+
 <body>
-    <section class="card1">
-    <h1>Robson Junior</h1>
-    <p style="text-align: center;">Desenvolvedor em formação • Foco em Back e Front-End</p>
-    </section>
-    <section class="card">
-        <h2>Quem é o Robson?</h2>
-        <p>Olá, sou o Robson Junior! Tenho 17 anos e sou apaixonado por tecnologia.</p>
-        <p>Atuo na área de Tecnologia da Informação há cerca de três anos, tendo passado pelas funções de Jovem Aprendiz e Estagiário. Nesse período, desenvolvi habilidades técnicas e comportamentais importantes para o ambiente profissional</p>
-        <p>No momento, estou me dedicando ao aprendizado de programação, tendo finalizado alguns módulos de HTML e CSS3, e iniciei o desenvolvimento de projetos utilizando JavaScript com Node.js.</p>
-        <p>Prezo muito a colaboração em grupo, a comunicação clara e procuro sempre agregar valor ao desenvolvimento dos projetos dos quais participo.</p>
-        <p>Seja bem-vindo ao meu portfólio!</p>
+
+<main>
+  <div class="container">
+
+    <!-- HEADER -->
+    <header>
+      <img src="perfil.jpg" alt="Robson Junior" class="profile">
+      <div>
+        <h1>Robson Junior</h1>
+        <span>Suporte Técnico N1</span>
+      </div>
+    </header>
+
+    <!-- SOBRE -->
+    <section>
+      <h2>Sobre</h2>
+      <p>
+        Atuo como Suporte Técnico N1, lidando com atendimento a usuários e resolução de problemas em ambiente de TI.
+        Tenho experiência prática em ambiente corporativo e base em desenvolvimento web, o que me permite compreender melhor os sistemas no dia a dia.
+        Tenho interesse em evoluir para a área de Segurança da Informação ao longo da minha carreira.
+      </p>
     </section>
 
-    <section class="card">
-        <h2>Projetos</h2>
-        <p>Tenho alguns projetos e aprendizados no meu GitHub. Você pode acessar clicando no botão abaixo</p>
-        <a href="https://github.com/RobsonJuniorFarias" target="_blank" class="button">Ver no GitHub</a>
+    <!-- EXPERIÊNCIA -->
+<section>
+  <h2>Experiência</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Suporte Técnico N1</h3>
+      <p>
+        Atendimento a usuários, identificação e resolução de problemas técnicos,
+        suporte remoto e auxílio no uso de sistemas internos em ambiente corporativo.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Experiência em Ambiente de TI</h3>
+      <p>
+        Vivência prática com rotinas de suporte, organização de demandas,
+        apoio em sistemas e participação no dia a dia da área de tecnologia.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+    <!-- HABILIDADES -->
+    <section>
+      <h2>Habilidades</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Suporte</h3>
+          <p>Atendimento, troubleshooting e suporte remoto.</p>
+        </div>
+
+        <div class="card">
+          <h3>Desenvolvimento</h3>
+          <p>HTML, CSS, JavaScript e Node.js.</p>
+        </div>
+
+        <div class="card">
+          <h3>Interesses</h3>
+          <p>Segurança da Informação e evolução na área de TI.</p>
+        </div>
+      </div>
     </section>
- 
-   <section class="card">
-        <h2>Contato & Redes</h2>
-        <p>Deixo aqui, minhas redes socias e meu currículo, caso tenha interesse.</p>
-        <a href="https://www.instagram.com/robszz07/" target="_blank" class="button">instagram</a>
-        <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank" class="button">Linkedin</a>
-        <a href="Currículo _ Vagas.com.pdf" target="_blank" class="button">Curriculo</a>
+
+    <!-- OBJETIVO -->
+    <section>
+      <h2>Objetivo</h2>
+      <p>
+        Crescer na área de tecnologia, adquirindo mais experiência prática e, futuramente,
+        atuar na área de Segurança da Informação.
+      </p>
     </section>
-    <footer style="background-color: #387373;">
-    <p>&copy; 2024 Robson Junior • Todos os direitos reservados</p>
-  </footer>
+
+    <!-- CONTATO -->
+    <section>
+      <h2>Contato</h2>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/RobsonJuniorFarias" target="_blank">GitHub</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  © 2026 Robson Junior
+</footer>
 
 </body>
 </html>
