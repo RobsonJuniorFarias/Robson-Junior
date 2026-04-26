@@ -1,200 +1,223 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio - Robson Junior</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <title>Robson Junior | Suporte Técnico</title>
 
-    <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-            --bg-color: #f7f7f7;
-            --text-color: #333;
-            --header-bg: linear-gradient(135deg, #007BFF, #4A90E2);
-            --header-text: #fff;
-            --card-bg: #fff;
-            --card-shadow: rgba(0, 0, 0, 0.1);
-            --button-bg: #007BFF;
-            --button-hover: #0056b3;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body.dark {
-            --bg-color: #121212;
-            --text-color: #f7f7f7;
-            --header-bg: linear-gradient(135deg, #1E1E1E, #333333);
-            --header-text: #f7f7f7;
-            --card-bg: #1E1E1E;
-            --card-shadow: rgba(255, 255, 255, 0.1);
-            --button-bg: #4A90E2;
-            --button-hover: #007BFF;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0b0f19;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
+    main {
+      flex: 1;
+    }
 
-        header {
-            background: var(--header-bg);
-            color: var(--header-text);
-            text-align: center;
-            padding: 50px 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px 20px;
+    }
 
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
 
-        header p {
-            font-size: 1.2em;
-        }
+    .profile {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #22c55e;
+    }
 
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--button-bg);
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+    header h1 {
+      font-size: 1.3rem;
+    }
 
-        .theme-toggle:hover {
-            background: var(--button-hover);
-        }
+    header span {
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    section {
+      margin-bottom: 35px;
+    }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px var(--card-shadow);
-            padding: 20px;
-            text-align: center;
-            flex: 1 1 calc(33.333% - 40px);
-            max-width: calc(33.333% - 40px);
-            min-width: 300px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            
-        }
+    h2 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: #22c55e;
+    }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+    p {
+      font-size: 0.92rem;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
 
-        .card h2 {
-            margin-bottom: 15px;
-        }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
 
-        .card p {
-            margin-bottom: 20px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: normal; /* Permite o texto quebrar a linha */
-            max-height: 200px; /* Limita o máximo de altura para o texto, mas não corta */
-            display: -webkit-box;
-            -webkit-line-clamp: 5; /* Número máximo de linhas que o texto pode ocupar */
-            -webkit-box-orient: vertical;
-        }
+    .card {
+      background: #111827;
+      padding: 14px;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
 
-        .card a {
-            display: inline-block;
-            background: var(--button-bg);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: transform 0.2s, background 0.3s;
-        }
+    .card:hover {
+      border: 1px solid #22c55e;
+    }
 
-        .card a:hover {
-            background: var(--button-hover);
-            transform: scale(1.05);
-        }
+    .card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 5px;
+    }
 
-        footer {
-            background: var(--header-bg);
-            color: var(--header-text);
-            text-align: center;
-            padding: 20px 10px;
-            margin-top: 20px;
-        }
+    .links a {
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      padding: 7px 12px;
+      border-radius: 6px;
+      border: 1px solid #22c55e;
+      color: #22c55e;
+      transition: 0.2s;
+    }
 
-        @media (max-width: 768px) {
-            .card {
-                flex: 1 1 100%;
-                max-width: 100%;
-            }
-        }
-    </style>
+    .links a:hover {
+      background: #22c55e;
+      color: #000;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b7280;
+      padding: 15px;
+    }
+
+  </style>
 </head>
 
 <body>
+
+<main>
+  <div class="container">
+
+    <!-- HEADER -->
     <header>
+      <img src="perfil.png" alt="Robson Junior" class="profile">
+      <div>
         <h1>Robson Junior</h1>
-        <p>Bem-vindo ao meu portfólio!</p>
+        <span>Suporte Técnico N1</span>
+      </div>
     </header>
 
-    <button class="theme-toggle">Alternar Tema</button>
+    <!-- SOBRE -->
+    <section>
+      <h2>Sobre</h2>
+      <p>
+        Atuo como Suporte Técnico N1, lidando com atendimento a usuários e resolução de problemas em ambiente de TI.
+        Tenho experiência prática em ambiente corporativo e base em desenvolvimento web, o que me permite compreender melhor os sistemas no dia a dia.
+        Tenho interesse em evoluir para a área de Segurança da Informação ao longo da minha carreira.
+      </p>
+    </section>
 
-    <main class="container">
-        <section class="card">
-            <h2>Sobre Mim</h2>
-            <p>Olá, seja bem-vindo (a) ao meu portifólio. Sou o Robson Junior, atualmente tenho 18 anos. Sou apaixonado por tecnologia e atuo na área de TI há quase três anos. Deixo disponível nesse site, minhas redes sociais, alguns projetos feitos por mim e até meu currículo. Atualmente estou focado nos estudos relacionado em programação, tanto BackEnd quanto FrontEnd, como HTML, CSS e Node.js. Gosto bastante do trabalho em equipe, sou bastante comunicativo e consigo ter uma boa relação interpessoal, geralmente agregando nos desenvolvimentos da equipe.  Se eu puder ajudar em algo, não hesite em entrar em contato! Obrigado.</p>
-        </section>
+    <!-- EXPERIÊNCIA -->
+<section>
+  <h2>Experiência</h2>
 
-        <section class="card">
-            <h2>Projetos</h2>
-            <p>Confira alguns projetos em código aberto feito por mim disponibilizado no GitHub.</p>
-            <a href="https://github.com/RobsonJuniorFarias" target="_blank">Ver Projetos</a>
-        </section>
+  <div class="grid">
 
-        <section class="card">
-            <h2>Contato</h2>
-            <p>Deixo aqui abaixo, minhas redes sociais e meu currículo, fique a vontade:</p>
-            <a href="https://www.instagram.com/robszz07/" target="_blank">Instagram</a><br><br>
-            <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a><br><br>
-            <a href="curriculo_compressed.pdf" target="_blank">Baixar Currículo</a>
-        </section>
-    </main>
+    <div class="card">
+      <h3>Suporte Técnico N1</h3>
+      <p>
+        Atendimento a usuários, identificação e resolução de problemas técnicos,
+        suporte remoto e auxílio no uso de sistemas internos em ambiente corporativo.
+      </p>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 Robson Junior. Todos os direitos reservados.</p>
-    </footer>
+    <div class="card">
+      <h3>Experiência em Ambiente de TI</h3>
+      <p>
+        Vivência prática com rotinas de suporte, organização de demandas,
+        apoio em sistemas e participação no dia a dia da área de tecnologia.
+      </p>
+    </div>
 
-    <script>
-        const themeToggle = document.querySelector('.theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-        });
-    </script>
+  </div>
+</section>
+
+    <!-- HABILIDADES -->
+    <section>
+      <h2>Habilidades</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Suporte</h3>
+          <p>Atendimento, troubleshooting e suporte remoto.</p>
+        </div>
+
+        <div class="card">
+          <h3>Desenvolvimento</h3>
+          <p>HTML, CSS, JavaScript e Node.js.</p>
+        </div>
+
+        <div class="card">
+          <h3>Interesses</h3>
+          <p>Segurança da Informação e evolução na área de TI.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OBJETIVO -->
+    <section>
+      <h2>Objetivo</h2>
+      <p>
+        Crescer na área de tecnologia, adquirindo mais experiência prática e, futuramente,
+        atuar na área de Segurança da Informação.
+      </p>
+    </section>
+
+    <!-- CONTATO -->
+    <section>
+      <h2>Contato</h2>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/RobsonJuniorFarias" target="_blank">GitHub</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  © 2026 Robson Junior
+</footer>
+
 </body>
-
 </html>
