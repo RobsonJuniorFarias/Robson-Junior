@@ -3,229 +3,1184 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <title>Robson Junior | Suporte Técnico</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Robson Junior | Analista de Suporte de TI & Infraestrutura</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg: #010409;
+      --card-bg: rgba(13, 17, 23, 0.75);
+      --card-border: rgba(35, 131, 226, 0.18);
+      --accent: #2383E2; 
+      --accent-glow: rgba(35, 131, 226, 0.25);
+      --terminal-green: #10b981;
+      --danger: #ef4444;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --tag-bg: rgba(35, 131, 226, 0.1);
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: #0b0f19;
-      color: #e5e7eb;
-      display: flex;
-      flex-direction: column;
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text-main);
+      background-image: 
+        radial-gradient(circle at 1% 1%, rgba(35, 131, 226, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 20% 20%, rgba(35, 131, 226, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
       min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    main {
-      flex: 1;
+    /* BARRA DE PROGRESSO DE SCROLL NO TOPO */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #38bdf8);
+      box-shadow: 0 0 10px #38bdf8;
+      z-index: 10001;
+      transition: width 0.1s ease-out;
+    }
+
+    /* =========================================
+       TELA DE GATILHO / TERMINAL GATEWAY
+       ========================================= */
+    #security-gate {
+      position: fixed;
+      inset: 0;
+      background: #010409;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    #security-gate.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .terminal-box {
+      background: rgba(13, 17, 23, 0.95);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 550px;
+      padding: 30px;
+      box-shadow: 0 0 35px var(--accent-glow);
+      text-align: center;
+      position: relative;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+    .terminal-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: 6px;
+    }
+
+    .gate-title {
+      font-family: var(--font-mono);
+      color: var(--danger);
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .gate-desc {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .gate-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      min-height: 50px;
+      position: relative;
+    }
+
+    .btn-gate {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    #btn-yes {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    #btn-yes:hover {
+      background: #38bdf8;
+      transform: scale(1.04);
+    }
+
+    #btn-no {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: var(--danger);
+    }
+
+    #system-log {
+      margin-top: 18px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #eab308;
+      min-height: 20px;
+    }
+
+    #decrypt-console {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-align: left;
+      color: var(--terminal-green);
+      line-height: 1.7;
+      margin-top: 15px;
+    }
+
+    /* TOAST DE SESSÃO */
+    #sec-toast {
+      position: fixed;
+      top: -100px;
+      right: 20px;
+      z-index: 9000;
+      background: rgba(13, 17, 23, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--terminal-green);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+      padding: 12px 20px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #fff;
+      transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    #sec-toast.show {
+      top: 20px;
+    }
+
+    /* =========================================
+       CONTEÚDO PRINCIPAL DO PORTFÓLIO
+       ========================================= */
+    #portfolio-content {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    #portfolio-content.visible {
+      opacity: 1;
     }
 
     .container {
       max-width: 900px;
       margin: auto;
-      padding: 25px 20px;
+      padding: 60px 20px;
     }
 
-    header {
+    /* REVELAÇÃO BIDIRECIONAL */
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(35px) scale(0.98);
+      filter: blur(3px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                  transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  filter 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: opacity, transform, filter;
+    }
+
+    .reveal-section.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+
+    /* =========================================
+       NOVA SEÇÃO HERO MELHORADA
+       ========================================= */
+    .hero-wrapper {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 32px;
       margin-bottom: 35px;
+      text-align: left;
+    }
+
+    .profile-wrapper {
+      position: relative;
+      padding: 4px;
+      border-radius: 50%;
+      background: conic-gradient(from 90deg, #010409, var(--accent), #38bdf8, var(--accent), #010409);
+      box-shadow: 0 0 25px var(--accent-glow);
+      flex-shrink: 0;
     }
 
     .profile {
-      width: 85px;
-      height: 85px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid #22c55e;
+      border: 4px solid var(--bg);
+      display: block;
     }
 
-    header h1 {
-      font-size: 1.3rem;
+    .hero-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    header span {
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--terminal-green);
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      padding: 4px 12px;
+      border-radius: 20px;
+      align-self: flex-start;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--terminal-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--terminal-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.85); }
+    }
+
+    .hero-details h1 {
+      font-family: var(--font-mono);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      min-height: 48px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background: var(--accent);
+      animation: blink 0.8s infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .hero-details span.sub {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--accent);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .hero-buttons a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 8px 14px;
+      border-radius: 6px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .hero-buttons a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* 3 INDICADORES RÁPIDOS (BADGES) */
+    .hero-indicators {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 55px;
+    }
+
+    .indicator-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+      font-family: var(--font-mono);
+    }
+
+    .indicator-card h4 {
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .indicator-card p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* =========================================
+       TIMELINE DE TRAJETÓRIA VERTICAL
+       ========================================= */
+    .timeline {
+      position: relative;
+      margin-top: 30px;
+      padding-left: 30px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 7px;
+      width: 2px;
+      height: calc(100% - 10px);
+      background: var(--card-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -30px;
+      top: 5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      z-index: 2;
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
       font-size: 0.85rem;
-      color: #9ca3af;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4px;
     }
 
-    section {
-      margin-bottom: 35px;
+    .timeline-content {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 20px;
     }
 
-    h2 {
-      font-size: 1.05rem;
-      margin-bottom: 8px;
-      color: #22c55e;
+    .timeline-content h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .timeline-content .role-info {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* ESTRUTURA DOS CARDS GERAIS */
+    section { margin-bottom: 55px; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 18px;
+    }
+
+    .section-title svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--accent);
     }
 
     p {
-      font-size: 0.92rem;
-      color: #9ca3af;
-      line-height: 1.6;
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-top: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
     }
 
     .card {
-      background: #111827;
-      padding: 14px;
-      border-radius: 8px;
-      transition: 0.2s;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      padding: 24px;
+      border-radius: 12px;
+      transition: transform 0.15s ease-out, border-color 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
 
     .card:hover {
-      border: 1px solid #22c55e;
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px -10px var(--accent-glow);
     }
 
     .card h3 {
-      font-size: 0.95rem;
-      margin-bottom: 5px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
     }
 
-    .links a {
-      display: inline-block;
-      margin-right: 10px;
-      margin-top: 10px;
-      font-size: 0.85rem;
-      padding: 7px 12px;
+    .card p, .card ul {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .card ul {
+      list-style-position: inside;
+      padding-left: 4px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 10px;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid rgba(35, 131, 226, 0.25);
+      color: #79c0ff;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 4px 10px;
       border-radius: 6px;
-      border: 1px solid #22c55e;
-      color: #22c55e;
-      transition: 0.2s;
     }
 
-    .links a:hover {
-      background: #22c55e;
-      color: #000;
+    /* =========================================
+       TERMINAL INTERATIVO COMPLETO REAL
+       ========================================= */
+    .terminal-container {
+      background: #0d1117;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      font-family: var(--font-mono);
     }
 
+    .term-header {
+      background: #161b22;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .term-title {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .term-body {
+      padding: 18px;
+      font-size: 0.85rem;
+      color: #79c0ff;
+      height: 250px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .term-output {
+      white-space: pre-wrap;
+      color: var(--text-main);
+    }
+
+    .term-input-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .term-prompt {
+      color: var(--terminal-green);
+    }
+
+    .term-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      flex: 1;
+    }
+
+    /* FOOTER */
     footer {
       text-align: center;
+      font-family: var(--font-mono);
       font-size: 0.8rem;
-      color: #6b7280;
-      padding: 15px;
+      color: #484f58;
+      padding: 30px;
+      border-top: 1px solid var(--card-border);
     }
 
+    /* =========================================
+       REGRAS EXPLICITAS DE ADAPTAÇÃO MOBILE
+       ========================================= */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 16px;
+      }
+
+      .hero-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-details {
+        align-items: center;
+      }
+
+      .status-badge {
+        align-self: center;
+      }
+
+      .hero-details h1 {
+        font-size: 1.7rem;
+      }
+
+      .hero-details .sub {
+        font-size: 0.82rem;
+      }
+
+      .profile {
+        width: 110px;
+        height: 110px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-buttons a {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero-indicators {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-bottom: 40px;
+      }
+
+      /* Desativa efeitos pesados no celular */
+      .card {
+        transform: none !important;
+        box-shadow: none !important;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-<main>
-  <div class="container">
+  <!-- BARRA DE PROGRESSO DE SCROLL -->
+  <div id="scroll-progress"></div>
 
-    <!-- HEADER -->
-    <header>
-      <img src="perfil.png" alt="Robson Junior" class="profile">
-      <div>
-        <h1>Robson Junior</h1>
-        <span>Suporte Técnico N1</span>
-      </div>
-    </header>
+  <!-- RAIO LASER / VARREDURA HOLOGRÁFICA -->
+  <div id="scan-beam"></div>
 
-    <!-- SOBRE -->
-    <section>
-      <h2>Sobre</h2>
-      <p>
-        Atuo como Suporte Técnico N1, lidando com atendimento a usuários e resolução de problemas em ambiente de TI.
-        Tenho experiência prática em ambiente corporativo e base em desenvolvimento web, o que me permite compreender melhor os sistemas no dia a dia.
-        Tenho interesse em evoluir para a área de Segurança da Informação ao longo da minha carreira.
-      </p>
-    </section>
-
-    <!-- EXPERIÊNCIA -->
-<section>
-  <h2>Experiência</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <h3>Suporte Técnico N1</h3>
-      <p>
-        Atendimento a usuários, identificação e resolução de problemas técnicos,
-        suporte remoto e auxílio no uso de sistemas internos em ambiente corporativo.
-      </p>
+  <!-- TOAST FLUTUANTE -->
+  <div id="sec-toast">
+    <span style="color: var(--terminal-green); font-size: 1.1rem;">●</span>
+    <div>
+      <strong>SESSÃO INICIADA // 200 OK</strong><br>
+      <span style="color: var(--text-muted); font-size: 0.75rem;">Módulos de segurança carregados com sucesso.</span>
     </div>
+  </div>
 
-    <div class="card">
-      <h3>Experiência em Ambiente de TI</h3>
-      <p>
-        Vivência prática com rotinas de suporte, organização de demandas,
-        apoio em sistemas e participação no dia a dia da área de tecnologia.
-      </p>
+  <!-- TELA DE GATILHO / PORTÃO DE ACESSO -->
+  <div id="security-gate">
+    <div class="terminal-box">
+      <div class="terminal-header">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">AUTH_GATEWAY // PROT_403</span>
+      </div>
+
+      <div id="gate-prompt">
+        <h2 class="gate-title">[ALERTA DE SEGURANÇA]</h2>
+        <p class="gate-desc">
+          Ambiente corporativo seguro identificado.<br>
+          Deseja inicializar o handshake e carregar o perfil de <strong>Robson Junior</strong>?
+        </p>
+
+        <div class="gate-buttons">
+          <button id="btn-yes" class="btn-gate">AUTORIZAR ACESSO</button>
+          <button id="btn-no" class="btn-gate">NEGAR / SAIR</button>
+        </div>
+
+        <p id="system-log"></p>
+      </div>
+
+      <div id="decrypt-console"></div>
     </div>
-
-
   </div>
-</section>
 
-    <!-- HABILIDADES -->
-    <section>
-      <h2>Habilidades</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Suporte</h3>
-          <p>Atendimento, troubleshooting e suporte remoto.</p>
+  <!-- CONTEÚDO PRINCIPAL DO PORTFÓLIO -->
+  <div id="portfolio-content">
+    <main class="container">
+
+      <!-- =========================================
+           NOVO HERO REFORMULADO
+           ========================================= -->
+      <section class="reveal-section" style="margin-bottom: 20px;">
+        <div class="hero-wrapper">
+          <div class="profile-wrapper">
+            <img src="Eletromidia_Retratos-806_websize.jpg" alt="Robson Junior" class="profile">
+          </div>
+          <div class="hero-details">
+            <div class="status-badge">
+              <span class="status-dot"></span> Ativo na Eletromidia
+            </div>
+            <h1><span id="typewriter-name"></span><span class="cursor">&nbsp;</span></h1>
+            <span class="sub">Analista de Suporte de TI &middot; Foco em Infraestrutura & Segurança</span>
+            
+            <div class="hero-buttons">
+              <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://github.com/RobsonJuniorFarias" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="Currículo_Profissional_-_Robson_Junior.pdf" target="_blank">Baixar Currículo</a>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="card">
-          <h3>Desenvolvimento</h3>
-          <p>HTML, CSS, JavaScript e Node.js.</p>
+      <!-- 3 INDICADORES RÁPIDOS -->
+      <section class="reveal-section" style="margin-bottom: 45px;">
+        <div class="hero-indicators">
+          <div class="indicator-card">
+            <h4>N1 / N2</h4>
+            <p>Suporte Técnico</p>
+          </div>
+          <div class="indicator-card">
+            <h4>PowerShell</h4>
+            <p>Automação & Setup</p>
+          </div>
+          <div class="indicator-card">
+            <h4>Microsoft</h4>
+            <p>Ambientes & AD</p>
+          </div>
         </div>
+      </section>
 
-        <div class="card">
-          <h3>Interesses</h3>
-          <p>Segurança da Informação e evolução na área de TI.</p>
+      <!-- RESUMO -->
+      <section class="reveal-section">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <span>// Resumo Profissional</span>
         </div>
-            <div class="card">
-  <h3>Softskills</h3>
-  <p>
-    Facilidade na comunicação, entendimento de problemas e apoio aos usuários
-    na utilização de sistemas, trabalho em equipe.
-  </p>
-</div>
-      </div>
-    </section>
+        <p>
+          Profissional de TI com experiência prática em suporte técnico corporativo presencial e remoto, troubleshooting de hardware e software, e administração no ecossistema Microsoft 365 e Active Directory. Forte inclinação para o desenvolvimento de rotinas automatizadas via scripts em PowerShell para ganho de escala operacional e apoio direto a demandas de Infraestrutura e Cibersegurança.
+        </p>
+      </section>
 
-    <!-- OBJETIVO -->
-    <section>
-      <h2>Objetivo</h2>
-      <p>
-        Crescer na área de tecnologia, adquirindo mais experiência prática e, futuramente,
-        atuar na área de Segurança da Informação.
-      </p>
-    </section>
+      <!-- =========================================
+           TIMELINE DE TRAJETÓRIA PROFISSIONAL
+           ========================================= */ -->
+      <section class="reveal-section">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+          <span>// Trajetória & Evolução</span>
+        </div>
+        
+        <div class="timeline">
+          <!-- Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Hoje &mdash; Eletromidia</div>
+            <div class="timeline-content">
+              <h3>Analista de Suporte Júnior</h3>
+              <p class="role-info">Automação &bull; N1/N2 &bull; Infraestrutura de TI</p>
+              <p>Resolução de chamados de média complexidade, manutenção corretiva e preventiva de equipamentos, homologação de novas estações corporativas e criação de rotinas automáticas de setup e diagnóstico de hardware.</p>
+            </div>
+          </div>
 
-    <!-- CONTATO -->
-    <section>
-      <h2>Contato</h2>
-      <div class="links">
-        <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank">LinkedIn</a>
-        <a href="https://github.com/RobsonJuniorFarias" target="_blank">GitHub</a>
-      </div>
-    </section>
+          <!-- Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2025 &mdash; Demarest Advogados</div>
+            <div class="timeline-content">
+              <h3>Aprendiz de TI</h3>
+              <p class="role-info">Atendimento Direto &bull; Hardware corporativo</p>
+              <p>Atendimento rápido de primeiro nível para colaboradores e executivos em software e infraestrutura de salas de reuniões. Homologação e preparação de ativos de TI corporativos.</p>
+            </div>
+          </div>
 
+          <!-- Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024 &mdash; Diallink T.H.</div>
+            <div class="timeline-content">
+              <h3>Jovem Aprendiz &rarr; Estagiário</h3>
+              <p class="role-info">Active Directory &bull; Office 365 &bull; CRM</p>
+              <p>Administração de contas no Active Directory, liberação de acessos, suporte geral ao ecossistema Microsoft 365 e engajamento na implantação de e-mails em campanhas via CRM.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPETÊNCIAS DETALHADAS -->
+      <section class="reveal-section">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span>// Competências</span>
+        </div>
+        <div class="grid">
+          <div class="card tilt-card">
+            <h3>🖥️ SUPORTE & INFRA</h3>
+            <p>Diagnóstico fino de hardware e sistemas operacionais, formatação, homologação e inventário patrimonial de ativos.</p>
+            <div class="tag-list">
+              <span class="tag">Windows 10/11</span>
+              <span class="tag">Hardware</span>
+              <span class="tag">Troubleshooting</span>
+              <span class="tag">Inventário</span>
+            </div>
+          </div>
+
+          <div class="card tilt-card">
+            <h3>☁️ CLOUD & IDENTIDADE</h3>
+            <p>Administração de contas corporativas, gestão de acessos e permissões centralizadas.</p>
+            <div class="tag-list">
+              <span class="tag">Microsoft 365</span>
+              <span class="tag">Active Directory</span>
+              <span class="tag">Azure AD</span>
+              <span class="tag">Google Workspace</span>
+            </div>
+          </div>
+
+          <div class="card tilt-card">
+            <h3>⚙️ AUTOMAÇÃO & DEV</h3>
+            <p>Implementação de lógica de programação para acelerar rotinas internas manuais ou processos estáticos.</p>
+            <div class="tag-list">
+              <span class="tag">PowerShell</span>
+              <span class="tag">Git / GitHub</span>
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+
+          <div class="card tilt-card">
+            <h3>🔐 SEGURANÇA DA INFO</h3>
+            <p>Aplicação de boas práticas de segurança defensiva, isolamento de acessos seguros, hardening e VPN.</p>
+            <div class="tag-list">
+              <span class="tag">Hardening</span>
+              <span class="tag">VPN</span>
+              <span class="tag">Acessos</span>
+              <span class="tag">Cybersecurity</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================
+           NOVA SEÇÃO DE PROJETOS E AUTOMAÇÕES
+           ========================================= -->
+      <section class="reveal-section">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+          <span>// Projetos & Automações</span>
+        </div>
+        <div class="grid">
+          <div class="card tilt-card">
+            <h3>⚙️ IT Automation Toolkit</h3>
+            <p>Desenvolvimento de scripts personalizados em PowerShell para automatização do setup inicial e padronização rápida de máquinas Windows corporativas.</p>
+            <div class="tag-list">
+              <span class="tag">PowerShell</span>
+              <span class="tag">Windows</span>
+              <span class="tag">Automação</span>
+            </div>
+          </div>
+
+          <div class="card tilt-card">
+            <h3>🔍 Hardware Diagnostic Tool</h3>
+            <p>Módulo utilitário programado para triar especificações e integridade de hardware em estações de trabalho, coletando dados críticos em lote.</p>
+            <div class="tag-list">
+              <span class="tag">PowerShell</span>
+              <span class="tag">Diagnostics</span>
+              <span class="tag">Hardware</span>
+            </div>
+          </div>
+
+          <div class="card tilt-card">
+            <h3>🖥️ Asset Audit Script</h3>
+            <p>Script estruturado de auditoria que varre as máquinas de rede local para levantar informações detalhadas de inventário e licenças ativas automaticamente.</p>
+            <div class="tag-list">
+              <span class="tag">PowerShell</span>
+              <span class="tag">IT Inventory</span>
+              <span class="tag">Auditoria</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FORMAÇÃO -->
+      <section class="reveal-section">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+          <span>// Formação Acadêmica & Certificados</span>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Análise e Desenvolvimento de Sistemas</h3>
+            <p>Centro Universitário FMU &bull; Graduação Tecnológica (Previsão 2026 – 2028)</p>
+          </div>
+          <div class="card">
+            <h3>Cursos de Especialização</h3>
+            <ul>
+              <li>Introdução à Segurança da Informação (Cisco)</li>
+              <li>Git e Controle de Versão (GitHub)</li>
+              <li>Lógica de Programação & Automação</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================
+           NOVO TERMINAL INTERATIVO REAL (EASTER EGG)
+           ========================================= -->
+      <section class="reveal-section">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-8v-2h8v2zm0-4h-8v-2h8v2zm0-4h-8V7h8v2z"/></svg>
+          <span>// Console Interativo N1 (Teste os Comandos)</span>
+        </div>
+        <div class="terminal-container">
+          <div class="term-header">
+            <span class="term-title">robson@portfolio:~$</span>
+            <div style="display:flex; gap:6px;">
+              <span class="dot dot-red" style="width:10px; height:10px;"></span>
+              <span class="dot dot-yellow" style="width:10px; height:10px;"></span>
+              <span class="dot dot-green" style="width:10px; height:10px;"></span>
+            </div>
+          </div>
+          <div class="term-body" id="term-body">
+            <div class="term-output">Digite "help" para ver os comandos de sistema disponíveis.</div>
+            <div class="term-input-line">
+              <span class="term-prompt">robson@portfolio:~$</span>
+              <!-- REMOVIDO O AUTOFOCUS DAQUI PARA NÃO PULAL A PÁGINA PARA BAIXO -->
+              <input type="text" class="term-input" id="term-input" autocomplete="off">
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- CONTATO -->
+      <section class="reveal-section">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span>// Conexão & Redes</span>
+        </div>
+        <p>Pronto para somar na sua equipe ou trocar experiências sobre tecnologia e segurança:</p>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/robson-junior-9a7139287/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/RobsonJuniorFarias" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      &gt; echo "© 2026 Robson Junior // Sistema operacional e protegido."
+    </footer>
   </div>
-</main>
 
-<footer>
-  © 2026 Robson Junior
-</footer>
+  <!-- JAVASCRIPT: TERMINAL REAL, TIMELINE, SCROLL REVEAL E TILT -->
+  <script>
+    const btnNo = document.getElementById('btn-no');
+    const btnYes = document.getElementById('btn-yes');
+    const systemLog = document.getElementById('system-log');
+    const gatePrompt = document.getElementById('gate-prompt');
+    const decryptConsole = document.getElementById('decrypt-console');
+    const securityGate = document.getElementById('security-gate');
+    const portfolioContent = document.getElementById('portfolio-content');
+    const scanBeam = document.getElementById('scan-beam');
+    const secToast = document.getElementById('sec-toast');
+    const typewriterElement = document.getElementById('typewriter-name');
+    const scrollProgress = document.getElementById('scroll-progress');
+
+    // 1. SCROLL PROGRESS
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      scrollProgress.style.width = progress + '%';
+    });
+
+    // 2. BOTÃO DE FUGA INTELIGENTE
+    const errorLogs = [
+      "LOG: Tentativa de cancelamento bloqueada pelo Admin.",
+      "AVISO: Política de segurança não permite recusa.",
+      "ERRO 403: Botão 'Sair' desativado temporariamente.",
+      "LOG: Calma! Dá uma olhada no portfólio primeiro 😉",
+      "AVISO: Risco crítico de perder um profissional qualificado!",
+      "LOG: Você precisa clicar em 'AUTORIZAR ACESSO'!"
+    ];
+    let dodgeCount = 0;
+
+    function esquivar() {
+      btnNo.style.position = 'fixed';
+      const margin = 50;
+      const maxX = window.innerWidth - btnNo.offsetWidth - margin;
+      const maxY = window.innerHeight - btnNo.offsetHeight - margin;
+
+      const randomX = Math.max(margin, Math.floor(Math.random() * maxX));
+      const randomY = Math.max(margin, Math.floor(Math.random() * maxY));
+
+      btnNo.style.left = randomX + 'px';
+      btnNo.style.top = randomY + 'px';
+
+      systemLog.innerText = errorLogs[dodgeCount % errorLogs.length];
+      dodgeCount++;
+    }
+
+    btnNo.addEventListener('mouseover', esquivar);
+    btnNo.addEventListener('touchstart', esquivar);
+
+    // 3. HANDSHAKE / DECRYPT BOOT
+    btnYes.addEventListener('click', () => {
+      gatePrompt.style.display = 'none';
+      decryptConsole.style.display = 'block';
+
+      const bootSteps = [
+        "Iniciando handshake TLS v1.3...",
+        "Carregando chaves RSA de Robson Junior...",
+        "Validando integridade do sistema... [OK]",
+        "Desbloqueando módulos de Infraestrutura e Automação...",
+        "STATUS 200: Acesso Concedido. Inicializando interface..."
+      ];
+
+      let step = 0;
+      const interval = setInterval(() => {
+        if (step < bootSteps.length) {
+          const line = document.createElement('div');
+          line.innerText = `> ${bootSteps[step]}`;
+          decryptConsole.appendChild(line);
+          step++;
+        } else {
+          clearInterval(interval);
+          setTimeout(desbloquearSistema, 350);
+        }
+      }, 200);
+    });
+
+    function desbloquearSistema() {
+      securityGate.classList.add('hidden');
+      portfolioContent.classList.add('visible');
+      scanBeam.classList.add('run-scan');
+
+      setTimeout(() => {
+        secToast.classList.add('show');
+        setTimeout(() => secToast.classList.remove('show'), 4000);
+      }, 300);
+
+      // Digitação do Nome no Hero
+      const nomeCompleto = "Robson Junior";
+      let charIdx = 0;
+      const typeInterval = setInterval(() => {
+        if (charIdx < nomeCompleto.length) {
+          typewriterElement.textContent += nomeCompleto[charIdx];
+          charIdx++;
+        } else {
+          clearInterval(typeInterval);
+        }
+      }, 80);
+
+      // 4. OBSERVER BIDIRECIONAL (ROLAGEM APARECE E SOME)
+      const revealSections = document.querySelectorAll('.reveal-section');
+      
+      const observerOptions = {
+        root: null,
+        threshold: 0.1, // Ativa e desativa com sensibilidade
+        rootMargin: "0px 0px -50px 0px"
+      };
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          } else {
+            entry.target.classList.remove('active');
+          }
+        });
+      }, observerOptions);
+
+      revealSections.forEach(section => {
+        sectionObserver.observe(section);
+      });
+
+      // 5. INICIALIZADOR DO TILT 3D SUTIL (Diferenciado por tela)
+      if (window.innerWidth > 600) {
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -5; // Limitado a 5 graus de inclinação
+            const rotateY = ((x - centerX) / centerX) * 5;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+          });
+
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+          });
+        });
+      }
+    }
+
+    // =========================================
+    // LÓGICA DE PROGRAMAÇÃO DO TERMINAL REAL
+    // =========================================
+    const termInput = document.getElementById('term-input');
+    const termBody = document.getElementById('term-body');
+
+    const commands = {
+      help: "Comandos disponíveis:\n  whoami      - Quem é Robson Junior?\n  skills      - Exibe competências técnicas\n  experience  - Linha do tempo profissional\n  projects    - Automações de destaque\n  clear       - Limpa a tela de logs",
+      whoami: "Robson Junior: Analista de Suporte de TI com foco em Infraestrutura, Automações com PowerShell e Cibersegurança na Eletromidia.",
+      skills: "Computação & Suporte: Windows 10/11, Redes, Atendimento N1/N2\nIdentidade: Active Directory, Microsoft 365, Azure AD\nScripting: PowerShell, HTML/CSS, Git & JavaScript\nSegurança: Hardening de sistemas corporativos, VPN e VPN Tuning.",
+      experience: "Trajetória:\n  [Atualmente] Eletromidia &mdash; Analista Júnior\n  [2025] Demarest &mdash; Aprendiz de TI\n  [2024] Diallink &mdash; Jovem Aprendiz / Estagiário",
+      projects: "Automações PowerShell:\n  1. IT Automation Toolkit (Padronização e setup rápido)\n  2. Hardware Diagnostic Tool (Inspeção de estações)\n  3. Asset Audit Script (Inventário em massa)"
+    };
+
+    termInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const value = termInput.value.trim().toLowerCase();
+        
+        // Cria a linha de comando enviada pelo usuário
+        const inputLine = document.createElement('div');
+        inputLine.innerHTML = `<span style="color: var(--terminal-green)">robson@portfolio:~$</span> <span style="color:#fff">${termInput.value}</span>`;
+        termBody.insertBefore(inputLine, termInput.parentElement);
+
+        if (value === 'clear') {
+          // Limpa todos os logs anteriores
+          const lines = termBody.querySelectorAll('div:not(.term-input-line)');
+          lines.forEach(l => l.remove());
+        } else if (value in commands) {
+          // Exibe a resposta do comando
+          const output = document.createElement('div');
+          output.className = 'term-output';
+          output.style.paddingLeft = '10px';
+          output.style.borderLeft = '2px solid var(--accent)';
+          output.innerHTML = commands[value].replace(/\n/g, '<br>');
+          termBody.insertBefore(output, termInput.parentElement);
+        } else if (value !== '') {
+          // Exibe erro de comando não reconhecido
+          const errorLine = document.createElement('div');
+          errorLine.className = 'term-output';
+          errorLine.style.color = 'var(--danger)';
+          errorLine.innerText = `Comando "${termInput.value}" desconhecido. Digite "help" para ver os comandos suportados.`;
+          termBody.insertBefore(errorLine, termInput.parentElement);
+        }
+
+        termInput.value = '';
+        termBody.scrollTop = termBody.scrollHeight; // Auto-scroll
+      }
+    });
+
+    // Mantém o foco no input do terminal se o usuário clicar na área do console
+    document.querySelector('.terminal-container').addEventListener('click', () => {
+      termInput.focus();
+    });
+  </script>
 
 </body>
 </html>
